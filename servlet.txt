@@ -1,0 +1,637 @@
+---------------------PRACTICAL 5:SERVLET----------------
+
+
+Q1)Calculator
+
+-->.html
+
+
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="cal">
+            <b>Enter 1st Number:</b>
+            <input type="text" name="1Num" value=""/>
+            <b>Enter 2nd Number:</b>
+            <input type="text" name="2Num" value=""/>
+            <b>Choose Operation</b>
+            <select name="operators">
+                <option>Addition</option>
+                <option>Subtraction</option>
+                <option>Multiplication</option>
+                <option>Division</option>
+                
+            </select>
+            <input type="submit" value="Calculate" name="btncal"/>
+        </form>
+    </body>
+</html>
+
+
+-->.java
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet(urlPatterns = {"/cal"})
+public class cal extends HttpServlet {
+
+  
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            String n1=request.getParameter("1Num");
+            String n2=request.getParameter("2Num");
+            String op=request.getParameter("operators");
+            if(op.equals("Addition")){
+                out.println("<h1>"+"Addition of 2 Number is"+(Integer.parseInt(n1)+Integer.parseInt(n2))+"<h1/>");
+            }
+            else if (op.equals("Subtraction")){
+                out.println("<h1>"+"Subtraction of 2 Number is"+(Integer.parseInt(n1)-Integer.parseInt(n2))+"<h1/>");
+            }
+            else if (op.equals("Multiplication")){
+                out.println("<h1>"+"Multiplication of 2 Number is"+(Integer.parseInt(n1)*Integer.parseInt(n2))+"<h1/>");
+            }
+            else {
+                out.println("<h1>"+"Division of 2 Number is"+(Integer.parseInt(n1)/Integer.parseInt(n2))+"<h1/>");
+            }
+            
+        }
+    }
+ 
+--------------------------------
+
+
+Q2)EMPLOYEE 
+
+
+-->.html
+
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="empdata">
+            <b>Enter Your Name</b>
+            <input type="text" name="name" value=""/>
+            <b>Enter Salary</b>
+            <input type="text" name="amt" value=""/>
+            <input type="submit" value="Submit"/>
+        </form>
+    </body>
+</html>
+
+
+-->.java
+
+
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(urlPatterns = {"/empdata"})
+public class empdata extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            String name =request.getParameter("name");
+            String salary =request.getParameter("amt");
+            double sal =Integer.parseInt(salary);
+            double hra =0.3*sal;
+            double ta=0.2*sal;
+            double da=0.1*sal;
+            double total=sal+hra+ta+da;
+            out.println("<br>"+"Name of Employee"+name+"<br>");
+            out.println("Your Total salary"+total);
+        
+ 
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet empdata</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet empdata at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+----------------------------------
+
+
+Q3) Student grade Card
+
+
+-->.html
+
+<html>
+    <head>
+        <title>Grade Card</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="GradeCard" >
+            <b>Enter Your Name</b>
+            <input type="text" name="name" value=""/><br><br>
+            <b>Enter Your Roll No</b>
+            <input type="text" name="rollno" value=""/><br><br>
+            <b>Enter Marks Of Any One Subject</b>
+            <input type="text" name="mks" value=""/><br><br>
+            <input type="submit" name="View Result" value="Submit"/>
+        </form>
+    </body>
+</html>
+
+
+-->.java
+
+
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet(urlPatterns = {"/GradeCard"})
+public class GradeCard extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            String name=request.getParameter("name");
+            String rn=request.getParameter("rollno");
+            String ms=request.getParameter("mks");
+            int marks=Integer.parseInt(ms);
+            out.println("Student Name:"+name);
+            out.println("Student Roll No:"+rn);
+            out.print("Marks Of One Subject:"+marks);
+            out.print(marks>=80);
+            if(marks>=80){
+                out.println("Your Grade is O");
+            }
+            else if(marks<=79 & marks>=70){
+                out.println("Your Grade is A+");
+            }
+            else if(marks<=69 & marks>=60){
+                out.println("Your Grade is A");
+            }
+            else if(marks<=59 & marks>=55){
+                out.println("Your Grade is B+");
+            }
+            else if(marks<=54 & marks>=50){
+                out.println("Your Grade is B");
+            }
+            else if(marks<=49 & marks>=45){
+                out.println("Your Grade is C");
+            }
+            else if(marks<=44 & marks>=40){
+                out.println("Your Grade is D");
+            }
+            else {
+            out.println("your failed");
+            }
+                
+            
+            
+            
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet GradeCard</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet GradeCard at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+------------------------------
+
+Q4) login form
+
+
+-->.html
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="form">
+            Enter the Username: <input type="text" name="txtuname" value="" /><br><br>
+            Enter the Password: <input type="password" name="txtpass" value="" /><br><br>
+            <input type="submit" value="Submit" />
+
+            
+        </form>
+    </body>
+</html>
+
+
+
+-->.java
+
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+
+@WebServlet(urlPatterns = {"/form"})
+public class form extends HttpServlet {
+protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            String name = request.getParameter("txtuname");
+            int pass = Integer.parseInt(request.getParameter("txtpass"));
+            if(name.equals("Bhavya") && pass == 1234)
+            {
+                out.print("Logged in Successfully");
+            }
+            else
+            {
+                out.print("Username or Password is Incorrect");
+            }
+        }
+    }
+
+----------------------------------PRACTICAL 6:REQUEST DISPATCHER--------------------
+
+
+Q1) Forwad Method[Error: HTTP Status 404 - Not Found ]
+
+
+
+-->.html
+
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <form action="servlet" method="POST">
+                <h2>Login form to demonstrate RequestDispatcher forward()</h2><br>
+                <a>Enter your username:</a>
+                <input type="text" name="username"/>
+                <br>
+                <a>Enter your password</a> 
+                <input type="password" name="password"/>
+                <br>
+                <input type="submit" name="btn_submit" value="submit"/>
+            </form>
+            
+        </div>
+    </body>
+</html>
+
+---------------------------
+
+-->Servlet.java 
+
+try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+           
+        String n = request.getParameter("txtname");
+        String p = request.getParameter("txtpass");
+        out.println("Welcome Anurag");
+        if(p.isEmpty()){
+            RequestDispatcher rd = request.getRequestDispatcher("/index.html");
+            rd.include(request, response);
+        }
+        else {
+            RequestDispatcher rd = request.getRequestDispatcher("servlet2") ;
+            rd.forward(request, response);
+        }
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+            
+        }
+    }
+
+    
+}
+
+-----------------------------
+
+-->Servlet2.java
+
+
+try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("servlet 2");
+            String n = request.getParameter("txtname");
+            String p = request.getParameter("txtpass");
+            
+            out.println("Welcome " + n);
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet servlet2</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet servlet2 at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+}
+
+Q2) include method/Backward method
+
+
+-->.html
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action= "accounts" methods= "GET">
+            Enter the Latest Reading:<input type="text" name="read1" value=""/><br><br>
+            Enter the Previous Reading:<input type="text" name="read2" value=""/><br><br>
+            <input type="submit" value="Submit"/>
+            
+        </form>
+    </body>
+</html>
+
+---------------------------------------
+
+-->Billing.java
+
+
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet(urlPatterns = {"/Billing"})
+public class Billing extends HttpServlet {
+        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            
+        }
+    }
+    @Override
+    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+    {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        //Extract the client data from request object. Infact this is actually to be done by S1
+        int latestReading = Integer.parseInt(request.getParameter("read1"));
+
+        //For Previous reading
+        int previousReading = Integer.parseInt(request.getParameter("read2"));
+
+        //read rate per unit from req object
+        Object obj = request.getAttribute("unitRate");
+        Double d1 = (Double) obj;
+        double rate = d1;
+
+        //now left  is to prepare bill
+        int noofUnits = latestReading-previousReading;
+        double amountPayable = noofUnits*rate;
+
+        //Prepare response. This response is added to S1 response
+        out.println("Previous Reading: "+previousReading);
+        out.println("<br>Current Reading: "+latestReading);
+        out.println("<br>Bill Amount Rs."+amountPayable);
+    }
+---------------------------------------------------
+
+-->accounts.java
+
+
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(urlPatterns = {"/accounts"})
+public class accounts extends HttpServlet {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            
+        }
+    }
+
+    /**
+     *
+     * @param req
+     * @param res
+     * @throws ServletException
+     * @throws IOException
+     */
+    @Override
+    public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
+    {
+        res.setContentType("text/html");
+        try (PrintWriter out = res.getWriter()) {
+            out.print("<u>Following are Your Bill Particulars</u><br><br>");
+            
+            
+            req.setAttribute("unitRate", 8.75);
+            
+           
+            RequestDispatcher rd = req.getRequestDispatcher("Billing");
+            
+           
+            rd.include(req, res);
+            
+            
+            out.print("<br><br>Please Pay the Bill Amount Before the 5th of Every Month to Avoid Penalty and Disconnection");
+        }
+    }
+
+
+----------------------------------PRACTICAL 6:JDBC AND SERVLET -------------------------
+
+
+-->.html
+
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="insert">
+            Username :<input type="text" name="user" value="" /><br>
+            Password :<input type="text" name="pass" value="" /><br>
+            <input type="submit" value="Insert" />
+        </form>
+    </body>
+</html>
+
+
+------
+
+-->.Java servlet
+
+String user = request.getParameter("user");
+           String pass = request.getParameter("pass");
+           Class.forName("com.mysql.jdbc.Driver");
+           Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sycs_228336", "pralex", "1906");
+           String sql = "insert into user values (?,?)";
+           PreparedStatement ps = con.prepareStatement(sql);
+           ps.setString(1,user);
+           ps.setString(2,pass);
+           int r = ps.executeUpdate();
+           if(r>0){
+           out.print("Inserted Successfully");
+           }
+
+
+-->Update record using servlet
+[Html
+Same code as insert
+Java servlet]
+Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sycs_228336","pralex","1906");
+            String sql = "update user set pass = ? where user = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1,request.getParameter("pass"));
+            ps.setString(2,request.getParameter("user"));
+            int r = ps.executeUpdate();
+            if(r>0){
+            out.print("Updated Successfully");
+            }
+            else{
+            out.print("Invalid user");
+            }
+
+-->Delete record using servlet
+[Html
+Same code as insert
+Java servlet]
+
+String user = request.getParameter("user");
+          Class.forName("com.mysql.jdbc.Driver");
+          Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sycs_228336","pralex","1906");
+          String sql = "delete from user where user = ?";
+          PreparedStatement ps= con.prepareStatement(sql);
+          ps.setString(1, user);
+          int r = ps.executeUpdate();
+          if(r>0){
+          out.print("Deleted Successfully");
+          }
+          else{
+          out.print("Inavlid user");
+          }
+          
+
+-->Display record using servlet
+[Html
+Same code as insert
+Java servlet]
+
+Class.forName("com.mysql.jdbc.Driver");
+           Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sycs_228336","pralex","1906");
+           Statement st = con.createStatement();
+           String sql = "Select * from user where user = '"+request.getParameter("user")+"' ";
+           ResultSet rs = st.executeQuery(sql);
+           while(rs.next()){
+           out.println("Username : "+rs.getString(1)+"<br>");
+           out.println("Password : "+rs.getString(2)+"<br>");
+           }

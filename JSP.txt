@@ -1,0 +1,576 @@
+----------------------------PRACTICAL 7:JSP 1 ------------------------
+
+
+Q1)SQUARE,CUBE
+
+
+-->index.html
+
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="square.jsp">
+            Enter a Number:<input type="text" name="txtnum" value=""/><br><br>
+            <input type="submit" value="Submit"/>
+        </form>
+        <form action="cube.jsp">
+            Enter a Number:<input type="text" name="txtnum" value=""/><br><br>
+            <input type="submit" value="Submit"/>
+        </form>
+    </body>
+</html>
+
+
+
+----------------
+
+
+-->square.jsp
+
+
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h1>Square Of a number</h1>
+        <% int num =Integer.parseInt(request.getParameter("txtnum"));%>
+        <%="Square of the Given Number is:"+(num*num)%>
+        
+    </body>
+</html>
+
+-------------------
+
+-->cube.jsp
+
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+       <h1>Cube Of a number</h1>
+        <% int num =Integer.parseInt(request.getParameter("txtnum"));%>
+        <%="Cube of the Given Number is:"+(num*num*num)%>
+    </body>
+</html>
+
+
+----------------
+
+
+Q2) number is even or odd
+
+
+-->index.html
+
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="evenodd.jsp">
+            Enter a Number:<input type="text" name="txtnum" value=""/><br><br>
+            <input type ="submit" value="Submit"/>
+             
+        </form>
+    </body>
+</html>
+
+-------------------
+
+
+-->evenodd.jsp
+
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <%
+            int num=Integer.parseInt(request.getParameter("txtnum"));
+            if(num%2==0)
+            {
+                out.print(num+"is an Even number");
+            }
+            else
+            {
+                out.print(num+"is an Odd number");
+            }
+            %>
+    </body>
+</html>
+
+
+-----------
+
+Q3)Multiplication of Table
+
+
+-->index.html
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="multi.jsp">
+            Enter a Number:<input type="text" name="txtnum" value=""/><br><br>
+            <input type="submit" value="Submit"/>
+        </form>
+    </body>
+</html>
+
+--------
+
+-->multi.jsp
+
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h1>Multiplication of Table</h1>
+        <%
+            int num=Integer.parseInt(request.getParameter("txtnum"));
+            for(int i=1;i<=10;i++)
+            {
+                int m =num*i;
+                out.print(num+"x"+i+"="+m+"<br>");     
+            }
+            %>
+    </body>
+</html>
+
+------------
+
+Q3)Fibonacci
+
+
+-->index.html
+
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+           <form action="fibonacci.jsp">
+            Enter a Number Terms for the Sequences: <input type="text" name="txtnum" value="" /><br><br>
+            <input type="submit" value="Submit" />
+            </form>
+
+    </body>
+</html>
+
+--------
+
+-->fibonaaci.jsp
+
+
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h1>Fibonacci Series</h1>
+                    <%
+                int num = Integer.parseInt(request.getParameter("txtnum"));
+                 int n1 = 0, n2 = 1;
+                 if(num <= 0)
+                 {
+                     out.print("Please Enter a Positive Number");
+                 }
+                 else if(num == 1)
+                 {
+                     out.print("Fibonacci Sequence Upto "+num+" Terms is "+n1);
+                 }
+                 else
+                 {
+                     out.print("Fibonacci Sequence Upto "+num+" is:<br>");
+                     out.print("<br>"+n1+"<br>"+n2);
+                     for(int i=2;i<num;i++)
+                     {
+                         int n3 = n1 + n2;
+                         n1 = n2;
+                         n2 = n3;
+                         out.print("<br>"+n3);
+                     }
+
+                 }
+            %>
+
+    </body>
+</html>
+
+------
+
+-------------------------PRACTICAL 8:JSP-2---------------------
+
+
+-->index.html
+
+
+<html>
+    <head>
+        <title>Jsp practical 9</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            
+            <form action="addjsp.jsp" method="POST">
+                <h1>  JSP practical 9  </h1>
+                <br><br>
+                <a>Enter your firstname :</a>
+                <input type="text" name="firstname"/><br>
+                <a>Enter your lastname :</a>
+                <input type="text" name="lastname"/><br>
+                <a>Enter your city name :</a>
+                <input type="text" name="city"/><br>
+                <a>Enter your email id :</a>
+                <input type="text" name="email"/><br>
+                <input type="submit" />
+            </form>
+            
+        </div>
+    </body>
+</html>
+
+
+----------------
+
+-->add.jsp
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"
+       import="java.io.*,java.util.*,java.sql.*,java.math.*"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>ADD JSP Page</title>
+    </head>
+    <body>
+        <% 
+         try{
+             
+        Class.forName("com.mysql.jdbc.Driver");
+      //  String sql ="jdbc://localhost//practical","root";
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/practical?useSSL=false&allowPublicKeyRetieval=true","root","12345");
+        
+        String sql = "insert into jspPr9(firstname,lastname,cityname,email_id) values(?,?,?,?)";
+        PreparedStatement st = con.prepareStatement(sql);
+        st.setString(1,request.getParameter("firstname").toString());
+        st.setString(2,request.getParameter("lastname").toString());
+        st.setString(3,request.getParameter("city").toString());
+        st.setString(4,request.getParameter("email").toString());
+        session.setAttribute("session_firstname",request.getParameter("firstname"));
+        session.setAttribute("session_lastname",request.getParameter("lastname"));
+       int i = st.executeUpdate();
+        if(i>0)
+        {
+        out.println("Record inserted");
+        con.close();
+        }
+         }
+        catch(Exception e)
+        {
+        out.println(e);
+        }
+        %>
+        <br>
+        <a href="updatejsp.jsp">Update</a>
+        
+    </body>
+</html>
+
+--------------
+
+-->update.jsp
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"
+       import="java.util.*,java.sql.*"
+        %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h2>Update for your first and last name </h2>
+        <br>
+         <form action="updatejsp.jsp" method="POST">
+                <h1>IF field left blank null will be recorded  </h1>
+                <br><br>
+                <a>Update your firstname :</a>
+                <input type="text" name="firstname_up"/><br>
+                <a>Update your lastname :</a>
+                <input type="text" name="lastname_up"/><br>
+                <a>Update your city name :</a>
+                <input type="text" name="city_up"/><br>
+                <a>Update your email id :</a>
+                <input type="text" name="email_up"/><br>
+                <input type="submit" />
+            </form>
+        <% 
+         try{
+             
+        Class.forName("com.mysql.jdbc.Driver");
+      //  String sql ="jdbc://localhost//practical","root";
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/practical?useSSL=false&allowPublicKeyRetieval=true","root","12345");
+    
+        String sql = " update jspPr9 set firstname = ?,lastname = ? ,cityname=?,email_id=? where firstname =? and lastname=?";
+        PreparedStatement st = con.prepareStatement(sql);
+        st.setString(1,request.getParameter("firstname_up").toString());
+        st.setString(2,request.getParameter("lastname_up").toString());
+        st.setString(3,request.getParameter("city_up").toString());
+        st.setString(4,request.getParameter("email_up").toString());
+        
+        String fname = (String) session.getAttribute("session_firstname");
+        st.setString(5,fname);
+        String lname = (String) session.getAttribute("session_lastname");
+        st.setString(6,lname);
+        int i = st.executeUpdate();
+        if(i>0)
+        {
+        out.println("Record updated");
+        con.close();
+        }
+         }
+        catch(NullPointerException e)
+        {
+        out.println(e);
+        }
+        %>
+       <a href="viewjsp.jsp">View data table</a> 
+    </body>
+</html>
+
+---------------
+
+-->delete.jsp
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"import="java.util.*,java.sql.*"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h2>Delete Record with respect to email id</h2>
+        <form action="deletejsp.jsp">
+            <a>Enter the email id :</a>
+            <input type="text" name="d_email" />
+            <input type="submit" value="delete"/>   
+        </form>
+        
+        <%
+       try{
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/practical?useSSL=false&allowPublicKeyRetieval=true","root","12345");
+        
+        String sql = "delete from jspPr9 where email_id=?";
+        PreparedStatement st = con.prepareStatement(sql);
+        st.setString(1,request.getParameter("d_email").toString());
+        int i = st.executeUpdate();
+        if(i >0)
+        {
+        out.println("Record deleted");
+        }
+       }
+       catch(Exception e)
+       {
+        
+       }
+            %>
+    </body>
+</html>
+
+
+-->viewjsp.jsp
+
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"
+        import="java.util.*,java.sql.*" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <%
+        try{
+             
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/practical?useSSL=false&allowPublicKeyRetieval=true","root","12345");
+        
+        String sql = "Select * from jspPr9";
+        PreparedStatement st = con.prepareStatement(sql);
+        
+        /*String fname = (String) session.getAttribute("session_firstname");
+        st.setString(1,fname);
+        String lname = (String) session.getAttribute("session_lastname");
+        st.setString(2,lname)*/
+        
+        ResultSet rs = st.executeQuery();
+         out.println("<table border=1>");
+    out.println("<tr><th>Firstname</th><th>Lastname</th><th>City</th><th>Email</th></tr>");
+        while(rs.next())
+        {
+       
+        out.println("<tr><td>" + rs.getString("firstname") + "</td><td>" + rs.getString("lastname") + "</td><td>" + rs.getString("cityname")
+                + "</td><td>" + rs.getString("email_id") + "</td></tr>");
+        }
+    out.println("</table>");
+        
+        rs.close();
+        st.close();
+        con.close();
+         }
+        catch(Exception e)
+        {
+        out.println(e);
+        }
+        %>
+        <a href="deletejsp.jsp"> Delete record</a>
+        
+        
+    </body>
+</html>
+
+---------------------PRAC 10:JSP3----------------------------
+<%-- 
+    Document   : data and time
+    Created on : 2 Apr, 2024, 7:40:39 PM
+    Author     : Pramod
+--%>
+
+<%@page import="java.util.Date"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h1>date and time!!</h1>
+        Today<%=new Date()%>
+    </body>
+</html>
+
+
+
+<%-- 
+    Document   : integers
+    Created on : 2 Apr, 2024, 7:45:44 PM
+    Author     : Pramod
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h1>power of 2 integers</h1>
+        <table border="1">
+        
+            <tr>
+                <th> Number </th>
+                <th>Power of </th>
+                
+            </tr>
+            <%
+                for(int i=0;i<=10;i++){
+                    int powerOf2 = (int) Math.pow(2, i);
+            %>
+            
+            <tr>
+                <td><%=1%></td>
+                <td><%= powerOf2%></td>
+                        
+            </tr>
+            <%}%>
+            
+                }
+        </table>
+    </body>
+</html>
+
+<%-- 
+    Document   : errorpage
+    Created on : 2 Apr, 2024, 8:10:38 PM
+    Author     : Pramod
+--%>
+<%@ page errorPage="error.jsp" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h1>errorpage</h1>
+        <% 
+            int num = 10;
+            int deno = 0;
+            int result;
+            try {
+                result = num/deno;
+            } catch (ArithmeticException e) {
+                response.sendRedirect("errorpage.jsp");
+            }
+        %>
+                
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+   
+    
+    
+ 
+
+
+

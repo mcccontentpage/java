@@ -1,0 +1,254 @@
+
+-------------------------PRACTICAL 9:JAVABEANS---------------------
+
+Q1)name,password,age store them in an object
+
+
+-->index.html
+
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <form action="userdetails.jsp" method="POST">
+            Enter Your UserName: <input type="text" name="username" /><br><br>
+            Enter Your Password: <input type="password" name="password" /><br><br>
+            Enter Your Age:<input type="text" name="age" /><br><br>
+            <input type="submit" value="Register" />
+            
+        </form>
+    </body>
+</html>
+
+---------------------
+
+-->userdetails.jsp
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <jsp:useBean id="userinfo" scope="page" class="pp.StudentsBean" />
+        <jsp:setProperty name="userinfo" property="*" />
+        Your Entered Details Are as Follows:<br><br>
+        Name:<jsp:getProperty name="userinfo" property="username" /><br><br>
+        Password:<jsp:getProperty name="userinfo" property="password" /><br><br>
+        Age:<jsp:getProperty name="userinfo" property="age" /><br><br>
+    </body>
+</html>
+
+
+----------
+
+-->StudentsBean.java
+
+
+package pp;
+public class StudentsBean {
+    public StudentsBean() {
+    }
+    private String username;
+    private String password;
+    private String age;
+    
+    public String getAge() {
+        return age;
+    }
+    public void setAge(String age) {
+        this.age = age;
+    }
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+   
+    public void setUsername(String username) {
+        this.username = username;
+    }
+}
+
+Q2.calculae area of circle
+
+index.html
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <form action="area.jsp" method="POST">
+                <h1> Enter Radius of circle </h1>
+                <input type="text" name="Radius" value="" /><br></br>
+                <input type="submit" value="calculate" />
+            </form>
+        </div>
+    </body>
+</html>
+
+area.jsp
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>JSP Page</title>
+</head>
+<body>
+    <%-- Define a JavaBean class --%>
+    <jsp:useBean id="circle" class="com.example.CircleBean" scope="page"/>
+    
+    <%-- Set properties of the bean --%>
+    <jsp:setProperty name="circle" property="radius" value="5"/>
+    
+    <%-- Calculate and display the area of the circle --%>
+    <% double area = Math.PI * Math.pow(circle.getRadius(), 2); %>
+    <p>Area of the circle is: <%= area %></p>
+</body>
+</html>
+
+CircleBean.Java
+
+public class CircleBean {
+    private float radius;
+
+    // Constructor
+    public CircleBean() {
+        this.radius = 0;
+    }
+
+    // Getter for radius
+    public float getRadius() {
+        return radius;
+    }
+
+    // Setter for radius
+    public void setRadius(float radius) {
+        this.radius = radius;
+    }
+
+    // Method to calculate the area of the circle
+    public float calculateArea() {
+        return (float) (Math.PI * Math.pow(radius, 2));
+    }
+}
+
+Q3.calcul total bill pname,price.quantity
+
+index.html
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <form action="bill.jsp" method="POST">
+                <h1>Product information</h1>
+                Enter product name:<input type="text" name="product" value="" />
+                Enter product price:<input type="text" name="price" value="" />
+                Enter total quantity:<input type="text" name="quantity" value="" />
+                                 <input type="submit" value="calculate bill" />
+            </form>
+        </div>
+    </body>
+</html>
+
+bill.jsp
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h2>Product Details</h2>
+        
+        <%-- Define a JavaBean named "bill" --%>
+        <jsp:useBean id="bill" class="com.example.Bill" scope="page"/>
+        
+        <%-- Set properties of the bean --%>
+        <jsp:setProperty name="bill" property="pname" value="Product Name"/>
+        <jsp:setProperty name="bill" property="price" value="100"/>
+        <jsp:setProperty name="bill" property="quantity" value="5"/>
+        
+        <%-- Display properties of the bean --%>
+        Product Name: <jsp:getProperty name="bill" property="pname"/><br>
+        Product Price: <jsp:getProperty name="bill" property="price"/><br>
+        Total Quantity: <jsp:getProperty name="bill" property="quantity"/><br>
+        
+        <%-- Calculate and display bill amount --%>
+        Calculated Bill Amount: <%= bill.calBill() %> Rs
+    </body>
+</html>
+
+Bill.java
+
+package com.example;
+
+public class Bill {
+    private String pname;
+    private float price;
+    private int quantity;
+
+    
+    public Bill() {
+    }
+
+    
+    public Bill(String pname, float price, int quantity) {
+        this.pname = pname;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public float calBill() {
+        return price * quantity;
+    }
+}
+
