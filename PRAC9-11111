@@ -1,0 +1,74 @@
+-->index.html
+
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <form action="userdetails.jsp" method="POST">
+            Enter Your UserName: <input type="text" name="username" /><br><br>
+            Enter Your Password: <input type="password" name="password" /><br><br>
+            Enter Your Age:<input type="text" name="age" /><br><br>
+            <input type="submit" value="Register" />
+            
+        </form>
+    </body>
+</html>
+
+---------------------
+
+-->userdetails.jsp
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <jsp:useBean id="userinfo" scope="page" class="pp.StudentsBean" />
+        <jsp:setProperty name="userinfo" property="*" />
+        Your Entered Details Are as Follows:<br><br>
+        Name:<jsp:getProperty name="userinfo" property="username" /><br><br>
+        Password:<jsp:getProperty name="userinfo" property="password" /><br><br>
+        Age:<jsp:getProperty name="userinfo" property="age" /><br><br>
+    </body>
+</html>
+
+
+----------
+
+-->StudentsBean.java
+
+
+package pp;
+public class StudentsBean {
+    public StudentsBean() {
+    }
+    private String username;
+    private String password;
+    private String age;
+    
+    public String getAge() {
+        return age;
+    }
+    public void setAge(String age) {
+        this.age = age;
+    }
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+   
+    public void setUsername(String username) {
+        this.username = username;
+    }
+}
