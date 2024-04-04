@@ -1,0 +1,27 @@
+try{
+            Class.forName("com.mysql.jdbc.Driver");
+            
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost/shree","root","123456");
+            InputStream is =new FileInputStream("");
+            String Q ="insert into student1 values(?,?,?,?)";
+            PreparedStatement st=con.prepareStatement(Q);
+            st.setInt(1,101);
+            st.setString(2,"xyz");
+            st.setDouble(3,88);
+            st.setBinaryStream(4, is);
+            int rs=st.executeUpdate();
+            if(rs>0)
+            {
+                System.out.println("Data Stored Sucessfully...");
+            }
+            else
+            {
+                System.out.print("Enable to store data");
+            }
+            con.close();
+       
+                }
+        catch(Exception ex){
+                    System.out.print(ex.toString());
+                    }
+            }
