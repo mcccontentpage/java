@@ -1,0 +1,68 @@
+
+index.html
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <form action="area.jsp" method="POST">
+                <h1> Enter Radius of circle </h1>
+                <input type="text" name="Radius" value="" /><br></br>
+                <input type="submit" value="calculate" />
+            </form>
+        </div>
+    </body>
+</html>
+
+area.jsp
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>JSP Page</title>
+</head>
+<body>
+    <%-- Define a JavaBean class --%>
+    <jsp:useBean id="circle" class="com.example.CircleBean" scope="page"/>
+    
+    <%-- Set properties of the bean --%>
+    <jsp:setProperty name="circle" property="radius" value="5"/>
+    
+    <%-- Calculate and display the area of the circle --%>
+    <% double area = Math.PI * Math.pow(circle.getRadius(), 2); %>
+    <p>Area of the circle is: <%= area %></p>
+</body>
+</html>
+
+CircleBean.Java
+
+public class CircleBean {
+    private float radius;
+
+    // Constructor
+    public CircleBean() {
+        this.radius = 0;
+    }
+
+    // Getter for radius
+    public float getRadius() {
+        return radius;
+    }
+
+    // Setter for radius
+    public void setRadius(float radius) {
+        this.radius = radius;
+    }
+
+    // Method to calculate the area of the circle
+    public float calculateArea() {
+        return (float) (Math.PI * Math.pow(radius, 2));
+    }
+}
