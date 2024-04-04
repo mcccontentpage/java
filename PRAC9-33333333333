@@ -1,0 +1,101 @@
+index.html
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <form action="bill.jsp" method="POST">
+                <h1>Product information</h1>
+                Enter product name:<input type="text" name="product" value="" />
+                Enter product price:<input type="text" name="price" value="" />
+                Enter total quantity:<input type="text" name="quantity" value="" />
+                                 <input type="submit" value="calculate bill" />
+            </form>
+        </div>
+    </body>
+</html>
+
+bill.jsp
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h2>Product Details</h2>
+        
+        <%-- Define a JavaBean named "bill" --%>
+        <jsp:useBean id="bill" class="com.example.Bill" scope="page"/>
+        
+        <%-- Set properties of the bean --%>
+        <jsp:setProperty name="bill" property="pname" value="Product Name"/>
+        <jsp:setProperty name="bill" property="price" value="100"/>
+        <jsp:setProperty name="bill" property="quantity" value="5"/>
+        
+        <%-- Display properties of the bean --%>
+        Product Name: <jsp:getProperty name="bill" property="pname"/><br>
+        Product Price: <jsp:getProperty name="bill" property="price"/><br>
+        Total Quantity: <jsp:getProperty name="bill" property="quantity"/><br>
+        
+        <%-- Calculate and display bill amount --%>
+        Calculated Bill Amount: <%= bill.calBill() %> Rs
+    </body>
+</html>
+
+Bill.java
+
+package com.example;
+
+public class Bill {
+    private String pname;
+    private float price;
+    private int quantity;
+
+    
+    public Bill() {
+    }
+
+    
+    public Bill(String pname, float price, int quantity) {
+        this.pname = pname;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public float calBill() {
+        return price * quantity;
+    }
+}
+
